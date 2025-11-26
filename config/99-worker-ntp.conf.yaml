@@ -1,1 +1,19 @@
-
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: worker
+  name: 99-worker-chrony
+spec:
+  config:
+    ignition:
+      version: 3.4.0
+    storage:
+      files:
+        - contents:
+            compression: gzip
+            source: data:;base64,H4sIAAAAAAAC/1TLUQ6CMAwA0P+eoidYV2bCeWAMbKyUdNWE25sYPvT75R1mipzTmFPhxENBmV/eA2/wQzyM/7a4rLGKNqT35KQyU7277Sd9BZ7To/VoB3LKWMCj9nOvoLYt4tex7TrwCQAA///Iph7ShQAAAA==
+          mode: 420
+          overwrite: true
+          path: /etc/chrony.conf
+          
