@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: day2-gitops-api-server-certificates
+  namespace: test-gitops
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: apply-api-server-certificate
+          image: registry.redhat.io/openshift4/ose-cli:latest
+          command:
+            - /bin/bash
+            - -c
+            - echo "Applying cert for user $API_USERNAME with password $API_PASSWORD"
+          env:
+            - name: API_USERNAME
+              value: "admin"
+            - name: API_PASSWORD
+              value: "password-v1"
+  backoffLimit: 2
